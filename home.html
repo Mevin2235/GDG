@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #F4F6F9;
+        }
+
+        .container {
+           /* width: 90%;
+            margin: auto;*/
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .greeting h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.greeting p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 0;
+}
+
+        .header input {
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+         
+        }
+.stats a{
+    text-decoration: none;
+    color: white;
+}
+        .stat-card {
+            flex: 1;
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .purple { background: #C084FC; }
+        .green { background: #4ADE80; }
+        .red { background: #F87171; }
+        .blue { background: #60A5FA; }
+
+        /* Charts & Panels */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .attendance {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+        }
+
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .small-card {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .file {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #F4F6F9;
+            margin-bottom: 10px;
+        }
+
+        .file i {
+            font-size: 18px;
+        }
+      /*  .app_name{
+    position: absolute;
+    left: 110px;
+    color: #f30688;
+}
+.logo img {
+    width: 100%;  
+    height: 100%; 
+    object-fit: cover;
+
+}
+.logo{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+}*/
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+       <!-- <div class="logo"> 
+            <img src="logo.png" alt="AI Assistant"> 
+        </div>
+        <div class="app_name">
+            <h><b>GRADIA AI</b></h>
+        </div>-->
+        <!-- Header -->
+<div class="header">
+    <div class="greeting">
+        <h2>Hello Teacher 👋</h2>
+        <p>Let's teach something new today!</p>
+    </div>
+    <input type="text" placeholder="Search">
+</div>
+
+
+        <!-- Stats Section -->
+        <div class="stats">
+            <div class="stat-card purple"><a href="notice.html" class="notice">40 Notice Board</a></div>
+            <div class="stat-card green"><a href="notes.html" class="note">40 Notes</a></div>
+            <div class="stat-card red"><a href="doc.html" class="document">40 Documents</a></div>
+            <div class="stat-card blue"><a href="teacher1.html" class="Assessments">40 Assessments</a></div>
+        </div>
+
+        <!-- Performance & Attendance -->
+        <div class="content-grid">
+            <div class="card">
+                <h3>Student's Performance</h3>
+                <canvas id="performanceChart"></canvas>
+            </div>
+            <div class="card attendance">
+                <canvas id="attendanceChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Rank List, Question Paper, Answer Key -->
+        <div class="small-grid">
+            <div class="small-card">
+                <h4>Rank List</h4>
+                &nbsp;
+                <p><strong><center>MARCH</center></strong></p>
+                &nbsp;
+               <center> 
+                <ol>1. Kavipriya</ol><br>
+                <ol>2. Jeevan Kishore</ol><br>
+                <ol>3. Karthikeyan</ol><br>
+                <ol>4. Mevin</ol><br>
+                <ol>5. Jesilyn</ol>
+            </center>
+            </div>
+
+            <div class="small-card">
+                <h4>Question Paper</h4>
+                &nbsp;
+                <img src="ques.jpg" width="100%">
+            </div>
+
+            <div class="small-card">
+                <h4>Answer Key</h4>
+                &nbsp;
+                <div class="file"><i class="fas fa-folder"></i> DM Answer Key (1).pdf</div>
+                <div class="file"><i class="fas fa-folder"></i> DM Answer Key (2).pdf</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Student's Performance Chart
+        var ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+                datasets: [{
+                    label: 'Performance',
+                    data: [10, 30, 50, 80, 100, 90, 85, 70, 60, 20, 10, 5],
+                    backgroundColor: 'rgba(96, 165, 250, 0.8)',
+                }]
+            }
+        });
+
+        // Attendance Chart
+        var ctx2 = document.getElementById('attendanceChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ["Present", "Absent"],
+                datasets: [{
+                    data: [60, 40],
+                    backgroundColor: ['#60A5FA', '#F87171'],
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Teacher Assistant - Login</title>
+    <link rel="stylesheet" href="styles2.css">
+    <style>
+        .left-section img{
+            height: 400px;
+            margin-right: 20px;
+        }
+        .container{
+            display: flex;
+            
+            padding-right: 40px;
+            margin-left: 500px;
+            border-radius: 20px;
+            backdrop-filter: blur(100px);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 7px 5px 10px 5px #f1f1f1;
+
+        }
+        .right-section h2{
+            margin-top: 70px;
+        }
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f8f9fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('conf-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+header{
+    background-color: #0056b3;
+}
+.logo img {
+    width: 100%;  /* Adjust size as needed */
+    height: 100%; 
+    object-fit: cover;
+    margin-top: -300px;
+margin-right: 200px;
+}
+.logo{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+}
+
+
+.login-container {
+    width: 100%;
+    max-width: 1000px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.illustration {
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+.forgot-password {
+    text-align: right;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.forgot-password a {
+    color: #4a73e8;
+    text-decoration: none;
+}
+
+.login-btn {
+    width: 100%;
+    background: #4a73e8;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.signup-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.signup-link a {
+    color: #4a73e8;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.or {
+    margin: 15px 0;
+    font-size: 14px;
+    color: #777;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-btn {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.social-btn img {
+    width: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <img src="illustration.png" alt="Login Illustration">
+        </div>
+        <div class="right-section">
+            <h2 style="margin-left: 40px;">LOGIN HERE</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <select id="userType" required>
+                        <option value="" disabled selected>Select User Type</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div class="signup-link">
+                <a href="signup.html">Create new account?</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const userType = document.getElementById('userType').value;
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+        alert(result.message);
+
+        if (response.ok) {
+            if (result.redirectPage === 'student_dashboard.html') {
+                window.location.href = 'student_dashboard.html';
+            } else {
+                window.location.href = 'home.html';
+            }
+        }
+    } catch (error) {
+        console.error('❌ Login error:', error);
+    }
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Teacher Assistant - Sign Up</title>
+    <link rel="stylesheet" href="styles1.css">
+    <style>
+        .left-section img{
+            height: 400px;
+            margin-right: 20px;
+        }
+        .container{
+            display: flex;
+            
+            padding-right: 40px;
+            margin-left: 500px;
+            border-radius: 20px;
+            backdrop-filter: blur(100px);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 7px 5px 10px 5px #f1f1f1;
+        }
+        .right-section{
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <img src="illustration1.jpg" alt="Signup Illustration">
+        </div>
+        <div class="right-section">
+            <h2 style="margin-left: 60px;">SIGN UP</h2>
+            <form id="signupForm">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                </div>
+                <div class="input-group">
+                    <select id="userType" required>
+                        <option value="" disabled selected>Select User Type</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+            <div class="login-link">
+                <a href="login.html">Already have an account?</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+    const userType = document.getElementById('userType').value;
+
+    if (password !== confirmPassword) {
+        alert('❌ Passwords do not match!');
+        return;
+    }
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, userType })
+        });
+
+        const result = await response.json();
+        alert(result.message);
+
+        if (response.ok) {
+            window.location.href = 'login.html';
+        }
+    } catch (error) {
+        console.error('❌ Signup error:', error);
+    }
+});
+
+    </script>
+</body>
+</html>

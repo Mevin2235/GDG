@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice Board</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4F6F9;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 30px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: white;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 200px;
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icons img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Notice Board */
+        .notice-board {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .notice-board h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .notice-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .exam-schedule { background-color: #C9A7F5; }
+        .holidays { background-color: #F5A7A7; }
+        .hackathon { background-color: #A7F5C8; }
+        .placement-training { background-color: #A7C7F5; }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <span style="color: #f30688;"><b>GRADIA AI</b></span>
+        </div>
+        <h2>📌 NOTICE BOARD</h2>
+        <div class="icons">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <i class="fas fa-search"></i>
+            </div>
+            <i class="fas fa-bell"></i>
+            <img src="meena.jpg" alt="Profile">
+        </div>
+    </div>
+
+    <!-- Notice Board Section -->
+    <div class="notice-board">
+        <div class="grid-container">
+            <!-- Exam Schedule -->
+            <div class="notice-card exam-schedule">
+                <h3>EXAM SCHEDULE</h3>
+                &nbsp;
+                <ul>
+                    1 AIML [12/03/2025]<br>
+                    2 DEVOPS [14/03/2025]<br>
+                    3 CC [16/03/2025]<br>
+                    4 DM [19/03/2025]<br>
+                    5 FSD [20/03/2025]<br>
+                    6 MAD [24/03/2025]<br>
+                </ul>
+            </div>
+
+            <!-- Hackathon -->
+            <div class="notice-card hackathon">
+                <h3>HACKATHON</h3>
+                &nbsp;
+                <ul>
+                    1 SIH HACKATHON<br>
+                    2 GDG HACKATHON<br>
+                    3 TNWISE WOMEN HACKATHON<br>
+                </ul>
+            </div>
+
+            <!-- Holidays -->
+            <div class="notice-card holidays">
+                <h3>HOLIDAYS</h3>
+                &nbsp;
+                <ul>
+                    1 HOLI [14/03/2025]<br>
+                    2 UGADI [30/03/2025]<br>
+                    3 RAMZAN [31/03/2025]<br>
+                    4 GOOD FRIDAY [18/04/2025]<br>
+                    5 EASTER DAY [20/04/2025]<br>
+                </ul>
+            </div>
+
+            <!-- Placement Training -->
+            <div class="notice-card placement-training">
+                <h3>PLACEMENT TRAINING</h3>
+                &nbsp;
+                <ul>
+                    1 APTITUDE TEST [16/03/2025]<br>
+                    2 COMMUNICATION SKILLS [20/03/2025]<br>
+                    3 GROUP DISCUSSION [24/03/2025]<br>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

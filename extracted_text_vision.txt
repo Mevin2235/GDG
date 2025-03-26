@@ -1,0 +1,9 @@
+
+Page 1:
+2/25 Q. Mobility':"' UNIT TEST PART-A ar User applications With the to Mobility is the ability of #over fice interacted and in to get Mobile Platformes * Mobility is an Prefsical ability ලා wood to deliver the Datas Which attol Features GTPa its functions t → security ↑ ↑ ↑ ↑ ↑ ↑ ↑ -> Touch Beer Mobile 0 & Google Security Wireframes → Networking primero 980 FC
+
+Page 2:
+Emulator and Simulator: Emulator Simulator Bimulator which The Emulator The Which is ७ Used is used to access it booke the the Internal Internal datas hard ware and and the simulation He software Components. of Applicationes. It is Used - It is Usped for aut for → Data Security Graptrical Design → Integration Gaming → 280,380 videos confedientialy It Uses the Uses the Macture Lovel Languages dom High Lovel Languages It does not It Starts debug the eurore. debuggiung
+
+Page 3:
+4 Components: nad Radio Bones Navigation Menus → Layout 1 1 17 → Widget Dropdown Merius Framework → Display alidous Tabe 2 Text Boxe Images Labels. 210 5. JAVA API → The Java APIs Used by the Mobile Application if I the and and server for accessing Back- ダ the Data. It is used to the -пок Batas / the Information storages Retrive the from MAR. wit

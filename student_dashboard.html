@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student's Dashboard - Gradia AI</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      
+    }
+
+    body {
+      background-color: #EEF2F5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header Styling */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 15px 20px;
+      border-bottom: 3px solid #007BFF;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #007BFF;
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+      margin-right: 8px;
+    }
+
+    .dashboard-title {
+      font-size: 22px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dashboard-title i {
+      color: #007BFF;
+    }
+
+    .profile-container {
+      display: flex;
+      align-items: center;
+    }
+
+    
+
+    /* Main Content */
+    .dashboard-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      min-height: calc(100vh - 80px);
+      align-items: center;
+      text-align: center;
+    }
+
+    .dashboard-container h2 {
+      font-size: 28px;
+      color: #007BFF;
+      margin-bottom: 30px;
+    }
+
+    /* Input Fields */
+    .input-field {
+      width: 100%;
+      max-width: 637px;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #007BFF;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: white;
+      
+    }
+
+    /* Button Styles */
+    .submit-button {
+      width: 100%;
+      max-width: 637px;
+      padding: 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
+
+    .submit-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Result Display Section */
+    .result-display {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 637px;
+      text-align: left;
+      background-color: #f1f1f1;
+      color: #333;
+    }
+
+    .result-card h3 {
+      color: #007BFF;
+      margin-bottom: 10px;
+    }
+
+    .feedback-section {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 700px) {
+      .dashboard-container h2 {
+        font-size: 24px;
+      }
+
+      .dashboard-title {
+        font-size: 18px;
+      }
+
+      .result-display, 
+      .submit-button, 
+      .input-field {
+        max-width: 100%;
+      }
+    }
+   
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="logo.png" alt="Gradia AI Logo">
+      <span>GRADIA AI</span>
+    </div>
+    <h2 class="dashboard-title">
+      <i class="fas fa-user-graduate"></i> STUDENT'S DASHBOARD
+    </h2>
+    
+  </header>
+
+  <!-- Main Content -->
+  <div class="dashboard-container">
+    <h2>View Your Results</h2>
+
+    <!-- Form Element -->
+    <form id="studentForm">
+      <input type="text" class="input-field" id="studentName" placeholder="Name" required />
+      <input type="text" class="input-field" id="registerNo" placeholder="Register No" required />
+      <input type="text" class="input-field" id="studentClass" placeholder="Class" required />
+
+      <button type="submit" class="submit-button">View Results</button>
+    </form>
+
+    <!-- Result Display Container -->
+    <div id="resultDisplay" class="result-display" style="display:none;"></div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const form = document.getElementById('studentForm');
+    const resultDisplay = document.getElementById('resultDisplay');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const studentName = document.getElementById('studentName').value.trim();
+      const registerNo = document.getElementById('registerNo').value.trim();
+      const studentClass = document.getElementById('studentClass').value.trim();
+
+      if (!studentName || !registerNo || !studentClass) {
+        alert('Please fill all the fields!');
+        return;
+      }
+
+      // Show loading message
+      resultDisplay.style.display = 'block';
+      resultDisplay.style.backgroundColor = '#f1f1f1';
+      resultDisplay.style.color = '#333';
+      resultDisplay.innerHTML = '⏳ Fetching your result... Please wait.';
+
+      try {
+        const response = await fetch('http://127.0.0.1:5001/student/view_result', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: studentName,
+            register_no: registerNo,
+            student_class: studentClass
+          })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          resultDisplay.style.backgroundColor = '#ffffff';
+          resultDisplay.style.color = '#333';
+
+          resultDisplay.innerHTML = `
+            <div class="result-card">
+              <h3>✅ Grade: ${result.grade}</h3>
+              <h4>📝 Feedback:</h4>
+              <div class="feedback-section">
+                ${formatFeedback(result.feedback)}
+              </div>
+            </div>
+          `;
+
+          form.reset();
+        } else {
+          resultDisplay.style.backgroundColor = '#f8d7da';
+          resultDisplay.style.color = '#721c24';
+          resultDisplay.innerHTML = result.message || '❌ No results found.';
+        }
+
+      } catch (error) {
+        console.error('❌ Error fetching result:', error);
+        resultDisplay.style.backgroundColor = '#f8d7da';
+        resultDisplay.style.color = '#721c24';
+        resultDisplay.innerHTML = '❌ Error connecting to the server.';
+      }
+    });
+
+    function formatFeedback(feedback) {
+      if (!feedback) {
+        return 'No feedback available.';
+      }
+
+      return feedback
+        .replace(/1\.\s*\*\*(.*?)\*\*/g, '<h4>1. $1</h4>')
+        .replace(/2\.\s*\*\*(.*?)\*\*/g, '<h4>2. $1</h4>')
+        .replace(/3\.\s*\*\*(.*?)\*\*/g, '<h4>3. $1</h4>')
+        .replace(/4\.\s*\*\*(.*?)\*\*/g, '<h4>4. $1</h4>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*\s(.*?)\n/g, '<li>$1</li>')
+        .replace(/\n/g, '<br>');
+    }
+  </script>
+
+</body>
+</html>

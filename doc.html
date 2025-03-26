@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #F4F6F9;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 30px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: white;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 200px;
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icons img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Documents Section */
+        .documents-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .documents-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .document-card {
+            display: flex;
+            align-items: center;
+            background: #EEF3F7;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .document-card:hover {
+            transform: scale(1.03);
+        }
+
+        .document-card i {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .document-card span {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* File Type Colors */
+        .pdf { color: red; }
+        .word { color: blue; }
+        .excel { color: green; }
+        .folder { color: orange; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <span><b>GRADIA AI</b></span>
+        </div>
+        <h2>📄 DOCUMENT</h2>
+        <div class="icons">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <i class="fas fa-search"></i>
+            </div>
+            <i class="fas fa-filter"></i>
+            <img src="meena.jpg" alt="Profile">
+        </div>
+    </div>
+
+    <!-- Documents Section -->
+    <div class="documents-container">
+        <div class="document-grid">
+            <div class="document-card"><i class="fas fa-file-pdf pdf"></i> <span>Answer key AI&ML.pdf</span></div>
+            <div class="document-card"><i class="fas fa-file-word word"></i> <span>ACE Report.word</span></div>
+            <div class="document-card"><i class="fas fa-folder folder"></i> <span>GDG Project</span></div>
+            <div class="document-card"><i class="fas fa-file-excel excel"></i> <span>Namelist CSE-B.xls</span></div>
+            <div class="document-card"><i class="fas fa-file-pdf pdf"></i> <span>Important Ques-DM.pdf</span></div>
+            <div class="document-card"><i class="fas fa-file-word word"></i> <span>Front page.word</span></div>
+            <div class="document-card"><i class="fas fa-file-word word"></i> <span>Report.word</span></div>
+            <div class="document-card"><i class="fas fa-file-excel excel"></i> <span>Participants list-2025.xls</span></div>
+            <div class="document-card"><i class="fas fa-file-pdf pdf"></i> <span>Model Questions.pdf</span></div>
+            <div class="document-card"><i class="fas fa-file-pdf pdf"></i> <span>AI&ML Questions.pdf</span></div>
+            <div class="document-card"><i class="fas fa-folder folder"></i> <span>Project Report</span></div>
+            <div class="document-card"><i class="fas fa-file-excel excel"></i> <span>GDG Namelist.xls</span></div>
+            <div class="document-card"><i class="fas fa-folder folder"></i> <span>teacher assistant</span></div>
+            <div class="document-card"><i class="fas fa-file-excel excel"></i> <span>Achievements 2025.xls</span></div>
+            <div class="document-card"><i class="fas fa-file-pdf pdf"></i> <span>UT 1.pdf</span></div>
+        </div>
+    </div>
+
+</body>
+</html>

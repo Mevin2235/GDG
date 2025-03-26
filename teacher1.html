@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Dashboard - Gradia AI</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #EEF2F5;
+      color: #333;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 15px 20px;
+      border-bottom: 3px solid #007BFF;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #007BFF;
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+      margin-right: 8px;
+    }
+
+    .dashboard-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .main-container h2 {
+      font-size: 28px;
+      color: #007BFF;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+    }
+
+    .main-container h2 i {
+      margin-right: 10px;
+    }
+
+    .input-field {
+      width: 637px;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #007BFF;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .upload-button, .scan-button {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px;
+      background: white;
+      border: 1.5px solid #007BFF;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #333;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .upload-button:hover, .scan-button:hover {
+      background: #f0f8ff;
+    }
+
+    .action-button {
+      width: 637px;
+      padding: 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+
+    .action-button:hover {
+      background: #0056b3;
+    }
+
+    .disabled-button {
+      width: 637px;
+      padding: 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+      
+    }
+    .feedback-textarea {
+  width: 637px;
+  height: 50px;
+  padding: 12px 15px;
+  margin-top: 20px;
+  border: 1.5px solid #007BFF;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical; /* Optional: allows resizing vertically */
+  background: #fff;
+  color: #333;
+}
+.profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #007BFF;
+    }
+    .response-box {
+  margin-top: 20px;
+  width: 637px;
+  min-height: 100px; /* Optional: ensures box has some height even when empty */
+  padding: 20px;
+  border: 1.5px solid #007BFF;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #000; /* Black font color */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+}
+.response-box h3,
+.response-box h4,
+.response-box p,
+.response-box li,
+.response-box ul {
+  color: #000; /* Force black text inside any tag */
+}
+    
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="logo.png" alt="Gradia AI Logo" />
+      <span>Teacher Dashboard</span>
+    </div>
+    <div class="profile-container">
+      <img src="meena.jpg" alt="Profile" class="profile-pic">
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-container">
+
+    <h2><i class="fas fa-file-alt"></i> Assessment & Grading</h2>
+
+    <!-- Input Fields -->
+    <input id="name" type="text" placeholder="Student Name" class="input-field" required />
+    <input id="registerNo" type="text" placeholder="Register No" class="input-field" required />
+    <input id="class" type="text" placeholder="Class" class="input-field" required />
+
+    <!-- Upload Inputs (hidden) -->
+    <input type="file" id="questionPaperFile" accept="application/pdf" style="display: none;" />
+    <input type="file" id="answerPaperFile" accept="application/pdf" style="display: none;" />
+
+    <!-- Upload Buttons and Scan Button -->
+    <div class="button-group">
+      <div class="upload-button" onclick="document.getElementById('questionPaperFile').click()">
+        <i class="fas fa-upload"></i> Upload Question Paper
+      </div>
+
+      <div class="upload-button" onclick="document.getElementById('answerPaperFile').click()">
+        <i class="fas fa-upload"></i> Upload Answer Paper
+      </div>
+
+      <div class="scan-button" onclick="scanPapers()">
+        <i class="fas fa-camera"></i> Scan Paper
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <button class="action-button" id="analyzeAndGrade">Analyze & Grade</button>
+
+    <!-- Feedback & Grade Response Textarea -->
+    <div id="responseMessage" class="response-box"></div>
+
+
+    <button class="disabled-button" id="storeFeedback" disabled>Store Results</button>
+    
+
+    <!-- Feedback & Grade Response Box -->
+    
+
+  </div>
+
+  <script>
+  // Store the latest feedback and grade
+  let latestFeedback = "";
+  let latestGrade = "";
+  let latestFilename = "";
+
+  const questionFileInput = document.getElementById('questionPaperFile');
+  const answerFileInput = document.getElementById('answerPaperFile');
+  const responseBox = document.getElementById('responseMessage');
+  const storeFeedbackBtn = document.getElementById('storeFeedback');
+  const feedbackTextarea = document.getElementById('responseMessage'); // NEW: grab textarea element
+
+  // File input handlers (optional: alert users what they selected)
+  questionFileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      alert(`✅ Selected Question Paper: ${file.name}`);
+    }
+  });
+
+  answerFileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      alert(`✅ Selected Answer Paper: ${file.name}`);
+    }
+  });
+
+  // Format the feedback to display as HTML
+  function formatFeedback(feedback) {
+    let formatted = feedback
+      .replace(/1\.\s*\*\*(.*?)\*\*/g, '<h4>1. $1</h4><ul>')
+      .replace(/2\.\s*\*\*(.*?)\*\*/g, '</ul><h4>2. $1</h4><ul>')
+      .replace(/3\.\s*\*\*(.*?)\*\*/g, '</ul><h4>3. $1</h4><ul>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*\s(.*?)(\n|$)/g, '<li>$1</li>')
+      .replace(/\n/g, '<br>');
+
+    if (!formatted.endsWith('</ul>')) {
+      formatted += '</ul>';
+    }
+
+    return formatted;
+  }
+
+  // Analyze and Grade Handler
+  document.getElementById('analyzeAndGrade').addEventListener('click', async () => {
+    if (questionFileInput.files.length === 0 || answerFileInput.files.length === 0) {
+      alert("Please upload both Question Paper and Answer Paper PDFs.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('questionPaper', questionFileInput.files[0]);
+    formData.append('answerPaper', answerFileInput.files[0]);
+    latestFilename = answerFileInput.files[0].name;
+
+    responseBox.innerHTML = "⏳ Analyzing and grading... Please wait.";
+    responseBox.style.color = "blue";
+
+    try {
+      const response = await fetch("http://127.0.0.1:5001/teacher/compare_and_grade", {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        latestFeedback = result.feedback || result.message;
+        latestGrade = result.grade || "N/A";
+
+        // Show formatted feedback inside the response box
+        responseBox.innerHTML = `
+          <h3>Feedback & Grade</h3>
+          ${formatFeedback(latestFeedback)}
+          <h4>Final Grade: <span style="color: #28a745;">${latestGrade}</span></h4>
+        `;
+
+        // Show raw feedback + grade inside the textarea
+        feedbackTextarea.value = `${latestFeedback}\n\nFinal Grade: ${latestGrade}`;
+
+        storeFeedbackBtn.disabled = false;
+      } else {
+        responseBox.innerHTML = `<p style="color:red;">❌ ${result.message || "Something went wrong!"}</p>`;
+        feedbackTextarea.value = ""; // Clear textarea on error
+        storeFeedbackBtn.disabled = true;
+      }
+    } catch (error) {
+      console.error("❌ Error:", error);
+      responseBox.innerHTML = `<p style="color:red;">❌ Error analyzing files!</p>`;
+      feedbackTextarea.value = ""; // Clear textarea on error
+      storeFeedbackBtn.disabled = true;
+    }
+  });
+
+  // Store feedback/grade handler
+  storeFeedbackBtn.addEventListener('click', async () => {
+    const name = document.getElementById('name').value.trim();
+    const registerNo = document.getElementById('registerNo').value.trim();
+    const studentClass = document.getElementById('class').value.trim();
+
+    if (!latestFeedback || !latestGrade) {
+      alert("⚠️ No feedback/grade available. Please analyze first.");
+      return;
+    }
+
+    if (!name || !registerNo || !studentClass) {
+      alert("⚠️ Please fill in Student Name, Register No, and Class!");
+      return;
+    }
+
+    const payload = {
+      filename: latestFilename,
+      grade: latestGrade,
+      feedback: latestFeedback,
+      name: name,
+      register_no: registerNo,
+      student_class: studentClass
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:5001/teacher/store_feedback", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("✅ Feedback and grade stored successfully!");
+        storeFeedbackBtn.disabled = true;
+      } else {
+        alert(result.message || "❌ Failed to store data.");
+      }
+    } catch (error) {
+      console.error("❌ Error storing feedback:", error);
+      alert("❌ Error storing feedback!");
+    }
+  });
+
+  function scanPapers() {
+    alert("📸 Scan paper feature coming soon!");
+  }
+</script>
